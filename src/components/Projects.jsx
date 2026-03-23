@@ -1,185 +1,139 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import PropTypes from 'prop-types';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import conceptHubImg from '../assets/concepthub.png';
-import mediRapidImg from '../assets/medirapid.png';
-import dhrmsImg from '../assets/dhrms.png';
-
-const projects = [
-    {
-        title: 'ConceptHub',
-        subtitle: 'Knowledge Sharing Platform',
-        description: 'A social knowledge-sharing platform where users can post, like, comment, and follow others. Features real-time messaging, optimized search, and infinite scrolling. Improved query performance using indexing and reduced API overhead using debouncing and lazy loading.',
-        tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'JWT', 'TanStack Query', 'Zustand', 'Socket.io', 'Tailwind CSS'],
-        github: import.meta.env.VITE_APP_GITHUB_CONCEPTHUB,
-        demo: import.meta.env.VITE_APP_CONCEPTHUB_DEPLOY_LINK,
-        image: conceptHubImg,
-    },
-    {
-        title: 'MediRapid',
-        subtitle: 'Medical Management System',
-        description: 'An emergency response platform designed to locate the nearest hospitals quickly and efficiently. Built with an optimized backend to ensure rapid hospital search queries during critical moments.',
-        tech: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL', 'REST APIs', 'GROQ API'],
-        github: import.meta.env.VITE_APP_GITHUB_MEDIRAPID,
-        demo: '#',
-        image: mediRapidImg,
-    },
-    {
-        title: 'DHRMS',
-        subtitle: 'Digital Health Record Management System',
-        description: 'A secure digital health platform for managing patient records and medical histories. Improved data accessibility and reduced manual handling by 40%. Features optimized backend logic and efficient database queries, resulting in 30% faster data retrieval and 35% reduced latency. Enhanced overall user experience for medical staff with a reliable and user-friendly interface.',
-        tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'REST APIs', 'Vite', 'JavaScript'],
-        github: import.meta.env.VITE_APP_GITHUB_DHRMS,
-        demo: '#',
-        image: dhrmsImg,
-    }
-];
-
-const ProjectCard = ({ project, index }) => {
-    const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["0 1", "1.3 1"]
-    });
-
-    const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-    const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
-    const xTransform = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? -100 : 100, 0]);
-
-    return (
-        <motion.div
-            ref={ref}
-            style={{ scale: scaleProgess, opacity: opacityProgess, x: xTransform }}
-            className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 group`}
-        >
-            {/* Image side */}
-            <motion.div
-                whileHover={{ scale: 1.05, rotateY: index % 2 === 1 ? -5 : 5, rotateX: 5 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="w-full lg:w-1/2 relative perspective-1000"
-            >
-                <div className="absolute -inset-4 bg-brand-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative rounded-2xl overflow-hidden border border-dark-border aspect-[4/3] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform-style-3d">
-                    <motion.div
-                        initial={{ backgroundColor: "rgba(59, 130, 246, 0.4)" }}
-                        whileHover={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-                        className="absolute inset-0 z-10 mix-blend-overlay transition-colors duration-500"
-                    />
-                    <motion.img
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
-                    />
-                </div>
-            </motion.div>
-
-            {/* Content side */}
-            <div className={`w-full lg:w-1/2 flex flex-col ${index % 2 === 1 ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'} z-20`}>
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                    className="text-brand-accent font-medium tracking-wide mb-2"
-                >
-                    Featured Project
-                </motion.p>
-                <motion.h3
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                    className="text-4xl font-black text-white mb-2 drop-shadow-lg"
-                >
-                    {project.title}
-                </motion.h3>
-                <motion.h4
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                    className="text-xl text-slate-300 font-medium mb-6"
-                >
-                    {project.subtitle}
-                </motion.h4>
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }}
-                    className="bg-dark-card/90 backdrop-blur-md border border-dark-border p-6 rounded-xl shadow-2xl w-full text-slate-300 mb-6 relative hover:border-brand-primary/50 transition-colors"
-                >
-                    <p className="leading-relaxed">{project.description}</p>
-                </motion.div>
-
-                <motion.ul
-                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.5, staggerChildren: 0.1 }}
-                    className={`flex flex-wrap gap-3 mb-8 w-full ${index % 2 === 1 ? 'lg:justify-start' : 'lg:justify-end'}`}
-                >
-                    {project.tech.map((tech, i) => (
-                        <motion.li
-                            initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 + (i * 0.05) }}
-                            whileHover={{ y: -5, backgroundColor: "rgba(59, 130, 246, 0.2)" }}
-                            key={i}
-                            className="text-sm font-medium text-brand-primary bg-brand-primary/10 px-3 py-1 rounded-full border border-brand-primary/20 cursor-default"
-                        >
-                            {tech}
-                        </motion.li>
-                    ))}
-                </motion.ul>
-
-                <motion.div
-                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                    className="flex items-center gap-6"
-                >
-                    <motion.a whileHover={{ scale: 1.2, color: "#fff" }} href={project.github} target="_blank" rel="noopener noreferrer" className="text-slate-400">
-                        <FaGithub size={28} />
-                    </motion.a>
-                    {project.demo !== '#' && (
-                        <motion.a whileHover={{ scale: 1.2, color: "#06b6d4" }} href={project.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400">
-                            <FaExternalLinkAlt size={26} />
-                        </motion.a>
-                    )}
-                </motion.div>
-            </div>
-        </motion.div>
-    );
-};
-
-ProjectCard.propTypes = {
-    project: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        subtitle: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        tech: PropTypes.arrayOf(PropTypes.string).isRequired,
-        github: PropTypes.string.isRequired,
-        demo: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-    }).isRequired,
-    index: PropTypes.number.isRequired,
-};
+import { motion } from 'framer-motion';
+import { FaRobot, FaHeartbeat, FaChartLine, FaMusic, FaMicrochip, FaGithub } from 'react-icons/fa';
+import synthesiaImage from '../assets/synthesia.png';
 
 const Projects = () => {
+    const projects = [
+        {
+            title: "AI Ticket Resolution System",
+            category: "LLM + RAG System",
+            icon: <FaRobot />,
+            color: "blue",
+            tech: ["LangChain", "Ollama", "FAISS", "Python"],
+            image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+            github: import.meta.env.VITE_APP_AI_TICKET_RESOLUTION_SYSTEM_GITHUB_URL,
+            description: "Developed an intelligent conversational system capable of autonomously resolving tickets by retrieving contextual documentation via a RAG pipeline and processing it through large language models."
+        },
+        {
+            title: "Diabetes Prediction System",
+            category: "Machine Learning / Healthcare",
+            icon: <FaHeartbeat />,
+            color: "pink",
+            tech: ["Scikit-learn", "Pandas", "Python"],
+            image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+            github: import.meta.env.VITE_APP_DIABETES_PREDICTION_SYSTEM_GITHUB_URL,
+            description: "Engineered a robust predictive model utilizing core machine learning classification algorithms to estimate diabetes onset risk based on comprehensive diagnostic health metrics."
+        },
+        {
+            title: "Election Data Visualization",
+            category: "Data Analytics & Insights",
+            icon: <FaChartLine />,
+            color: "purple",
+            tech: ["Python", "Matplotlib", "Seaborn"],
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+            github: import.meta.env.VITE_APP_ELECTION_DATA_VISUALIZATION_GITHUB_URL,
+            description: "Constructed extensive data analysis pipelines designed to dissect large-scale electoral datasets, producing insightful graphical representations of voter demographics and historical trends."
+        },
+        {
+            title: "Synthesia Music Platform",
+            category: "Full Stack Development",
+            icon: <FaMusic />,
+            color: "indigo",
+            tech: ["React.js", "Node.js", "Express", "MongoDB"],
+            image: synthesiaImage,
+            github: import.meta.env.VITE_APP_SYNTHESIA_MUSIC_PLATFORM_GITHUB_URL,
+            description: "Built a fully functional end-to-end music streaming application showcasing robust REST API integration, dynamic state management, and seamless audio playback architecture."
+        },
+        {
+            title: "CPU Scheduler Simulator",
+            category: "Core CS + Visualization",
+            icon: <FaMicrochip />,
+            color: "teal",
+            tech: ["C/C++", "Algorithms"],
+            image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+            github: import.meta.env.VITE_APP_CPU_SCHEDULER_SIMULATOR_GITHUB_URL,
+            description: "Designed a graphical and logic-driven simulation utility computing and visualizing operating system process scheduling algorithms including Round Robin and SJF."
+        }
+    ];
+
     return (
-        <section id="projects" className="py-24 bg-dark-card/5 relative overflow-hidden">
-            <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="absolute top-0 -right-40 w-[600px] h-[600px] border border-brand-primary/10 rounded-full"
-            />
+        <section id="projects" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)] pointer-events-none" />
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-20"
+                    className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500 mb-6 drop-shadow-sm">
-                        Featured <span className="text-brand-primary">Projects</span>
+                    <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400 mb-6 drop-shadow-sm">
+                        Projects
                     </h2>
                     <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: 80 }}
-                        transition={{ duration: 1 }}
-                        className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-accent mx-auto rounded-full"
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
                     />
                 </motion.div>
-                <div className="space-y-24">
-                    {projects.map((project, index) => (
-                        <ProjectCard key={project.title} project={project} index={index} />
+
+                <div className="flex flex-col gap-12">
+                    {projects.map((project, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            whileHover={{ y: -10 }}
+                            className={`bg-gradient-to-br from-[#0f0f15] to-[#181824] border border-white/5 hover:border-${project.color}-500/50 rounded-2xl relative overflow-hidden group shadow-xl flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                        >
+                            <div className="w-full md:w-1/2 h-64 md:min-h-[400px] relative overflow-hidden shrink-0">
+                                <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+                                <div className={`absolute inset-0 bg-gradient-to-t from-[#0f0f15] to-transparent md:hidden`} />
+                                <div className={`hidden md:block absolute inset-0 ${idx % 2 === 0 ? 'bg-gradient-to-r' : 'bg-gradient-to-l'} from-[#0f0f15] via-[#0f0f15]/50 to-transparent`} />
+                            </div>
+
+                            {/* Content side */}
+                            <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative">
+
+                            {/* Abstract Glowing Accent */}
+                            <div className={`absolute -right-10 top-32 w-32 h-32 bg-${project.color}-500/20 rounded-full blur-2xl group-hover:bg-${project.color}-500/30 transition-all duration-500`} />
+                            
+                            <div className={`w-14 h-14 rounded-xl bg-${project.color}-500/20 text-${project.color}-400 flex items-center justify-center text-3xl mb-6 shadow-[0_0_15px_rgba(var(--tw-colors-${project.color}-500),0.3)] relative z-10`}>
+                                {project.icon}
+                            </div>
+                            
+                            <span className={`inline-block px-3 py-1 rounded-full bg-${project.color}-500/10 border border-${project.color}-500/30 text-${project.color}-300 text-xs font-bold tracking-wider uppercase mb-4`}>
+                                {project.category}
+                            </span>
+                            
+                            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors">
+                                {project.title}
+                            </h3>
+                            
+                            <p className="text-slate-400 mb-6 line-clamp-4 leading-relaxed">
+                                {project.description}
+                            </p>
+                            
+                            <div className="flex flex-wrap items-center justify-between gap-4 mt-auto">
+                                <div className="flex flex-wrap gap-2">
+                                    {project.tech.map((t, tIdx) => (
+                                        <span key={tIdx} className="px-2.5 py-1 bg-[#222230] text-slate-300 text-xs font-medium rounded border border-white/5">
+                                            {t}
+                                        </span>
+                                    ))}
+                                </div>
+                                {project.github && (
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
+                                        <FaGithub size={20} />
+                                    </a>
+                                )}
+                            </div>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
