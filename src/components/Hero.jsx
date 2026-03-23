@@ -123,20 +123,37 @@ const Hero = () => {
                         className="flex items-center justify-center md:justify-start gap-8 pt-10 text-slate-400"
                     >
                         {[
-                            { Icon: FaGithub, href: import.meta.env.VITE_GITHUB_URL },
-                            { Icon: FaLinkedin, href: import.meta.env.VITE_LINKEDIN_URL },
-                            { Icon: FaEnvelope, href: `mailto:${import.meta.env.VITE_EMAIL}` }
+                            { Icon: FaGithub, href: import.meta.env.VITE_GITHUB_URL, isExternal: true },
+                            { Icon: FaLinkedin, href: import.meta.env.VITE_LINKEDIN_URL, isExternal: true },
+                            { Icon: FaEnvelope, to: "contact", isExternal: false }
                         ].map((social, idx) => (
-                            <motion.a
-                                key={idx}
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                whileHover={{ y: -5, color: "#fff", scale: 1.2, rotate: 5 }}
-                                className="transition-colors duration-300"
-                            >
-                                <social.Icon size={32} />
-                            </motion.a>
+                            social.isExternal ? (
+                                <motion.a
+                                    key={idx}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ y: -5, color: "#fff", scale: 1.2, rotate: 5 }}
+                                    className="transition-colors duration-300 cursor-pointer"
+                                >
+                                    <social.Icon size={32} />
+                                </motion.a>
+                            ) : (
+                                <Link 
+                                    key={idx}
+                                    to={social.to} 
+                                    smooth={true} 
+                                    duration={500}
+                                    className="cursor-pointer"
+                                >
+                                    <motion.div
+                                        whileHover={{ y: -5, color: "#fff", scale: 1.2, rotate: 5 }}
+                                        className="transition-colors duration-300"
+                                    >
+                                        <social.Icon size={32} />
+                                    </motion.div>
+                                </Link>
+                            )
                         ))}
                     </motion.div>
                 </motion.div>

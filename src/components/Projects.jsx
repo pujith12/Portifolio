@@ -2,6 +2,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import conceptHubImg from '../assets/concepthub.png';
+import mediRapidImg from '../assets/medirapid.png';
+import dhrmsImg from '../assets/dhrms.png';
 
 const projects = [
     {
@@ -9,24 +12,33 @@ const projects = [
         subtitle: 'Knowledge Sharing Platform',
         description: 'A social knowledge-sharing platform where users can post, like, comment, and follow others. Features real-time messaging, optimized search, and infinite scrolling. Improved query performance using indexing and reduced API overhead using debouncing and lazy loading.',
         tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'JWT', 'TanStack Query', 'Zustand', 'Socket.io', 'Tailwind CSS'],
-        github: '#',
-        demo: '#',
-        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
+        github: import.meta.env.VITE_APP_GITHUB_CONCEPTHUB,
+        demo: import.meta.env.VITE_APP_CONCEPTHUB_DEPLOY_LINK,
+        image: conceptHubImg,
     },
     {
         title: 'MediRapid',
         subtitle: 'Medical Management System',
         description: 'An emergency response platform designed to locate the nearest hospitals quickly and efficiently. Built with an optimized backend to ensure rapid hospital search queries during critical moments.',
         tech: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL', 'REST APIs', 'GROQ API'],
-        github: '#',
+        github: import.meta.env.VITE_APP_GITHUB_MEDIRAPID,
         demo: '#',
-        image: 'https://images.unsplash.com/photo-1538108149393-cecf8aba514d?auto=format&fit=crop&q=80&w=800',
+        image: mediRapidImg,
+    },
+    {
+        title: 'DHRMS',
+        subtitle: 'Digital Health Record Management System',
+        description: 'A secure digital health platform for managing patient records and medical histories. Improved data accessibility and reduced manual handling by 40%. Features optimized backend logic and efficient database queries, resulting in 30% faster data retrieval and 35% reduced latency. Enhanced overall user experience for medical staff with a reliable and user-friendly interface.',
+        tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'REST APIs', 'Vite', 'JavaScript'],
+        github: import.meta.env.VITE_APP_GITHUB_DHRMS,
+        demo: '#',
+        image: dhrmsImg,
     }
 ];
 
 const ProjectCard = ({ project, index }) => {
     const ref = useRef(null);
-const { scrollYProgress } = useScroll({
+    const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["0 1", "1.3 1"]
     });
@@ -115,9 +127,11 @@ const { scrollYProgress } = useScroll({
                     <motion.a whileHover={{ scale: 1.2, color: "#fff" }} href={project.github} target="_blank" rel="noopener noreferrer" className="text-slate-400">
                         <FaGithub size={28} />
                     </motion.a>
-                    <motion.a whileHover={{ scale: 1.2, color: "#06b6d4" }} href={project.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400">
-                        <FaExternalLinkAlt size={26} />
-                    </motion.a>
+                    {project.demo !== '#' && (
+                        <motion.a whileHover={{ scale: 1.2, color: "#06b6d4" }} href={project.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400">
+                            <FaExternalLinkAlt size={26} />
+                        </motion.a>
+                    )}
                 </motion.div>
             </div>
         </motion.div>
@@ -125,52 +139,52 @@ const { scrollYProgress } = useScroll({
 };
 
 ProjectCard.propTypes = {
-  project: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    tech: PropTypes.arrayOf(PropTypes.string).isRequired,
-    github: PropTypes.string.isRequired,
-    demo: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-  }).isRequired,
-  index: PropTypes.number.isRequired,
+    project: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        subtitle: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+        github: PropTypes.string.isRequired,
+        demo: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+    }).isRequired,
+    index: PropTypes.number.isRequired,
 };
 
 const Projects = () => {
-  return (
-    <section id="projects" className="py-24 bg-dark-card/5 relative overflow-hidden">
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 -right-40 w-[600px] h-[600px] border border-brand-primary/10 rounded-full"
-      />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500 mb-6 drop-shadow-sm">
-            Featured <span className="text-brand-primary">Projects</span>
-          </h2>
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: 80 }}
-            transition={{ duration: 1 }}
-            className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-accent mx-auto rounded-full"
-          />
-        </motion.div>
-        <div className="space-y-24">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+    return (
+        <section id="projects" className="py-24 bg-dark-card/5 relative overflow-hidden">
+            <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                className="absolute top-0 -right-40 w-[600px] h-[600px] border border-brand-primary/10 rounded-full"
+            />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-20"
+                >
+                    <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500 mb-6 drop-shadow-sm">
+                        Featured <span className="text-brand-primary">Projects</span>
+                    </h2>
+                    <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: 80 }}
+                        transition={{ duration: 1 }}
+                        className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-accent mx-auto rounded-full"
+                    />
+                </motion.div>
+                <div className="space-y-24">
+                    {projects.map((project, index) => (
+                        <ProjectCard key={project.title} project={project} index={index} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default Projects;

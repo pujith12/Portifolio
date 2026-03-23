@@ -11,6 +11,8 @@ const achievements = [
         bg: 'bg-yellow-400/10',
         border: 'border-yellow-400/20',
         gradient: 'from-yellow-400/20',
+        link: import.meta.env.VITE_APP_LEETCODE_PROFILE_URL,
+        linkText: 'View Profile'
     },
     {
         icon: FaStar,
@@ -21,6 +23,8 @@ const achievements = [
         bg: 'bg-brand-primary/10',
         border: 'border-brand-primary/20',
         gradient: 'from-brand-primary/20',
+        link: import.meta.env.VITE_APP_HACKER_RANK_PROFILE_URL,
+        linkText: 'View Profile'
     },
     {
         icon: FaMedal,
@@ -31,6 +35,8 @@ const achievements = [
         bg: 'bg-brand-secondary/10',
         border: 'border-brand-secondary/20',
         gradient: 'from-brand-secondary/20',
+        link: import.meta.env.VITE_APP_CONGNTIVE_ABILITY_COMPETITION_URL,
+        linkText: 'View Certificate'
     }
 ];
 
@@ -72,9 +78,22 @@ const Achievements = () => {
 
                             <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
                             <h4 className="text-brand-accent font-medium mb-4">{item.platform}</h4>
-                            <p className="text-slate-400 leading-relaxed">
+                            <p className="text-slate-400 leading-relaxed mb-6">
                                 {item.description}
                             </p>
+
+                            {item.link && (
+                                <motion.a
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ x: 5 }}
+                                    className={`inline-flex items-center gap-2 ${item.color} font-bold hover:opacity-80 transition-all`}
+                                >
+                                    {item.linkText}
+                                    <span className="text-xl">→</span>
+                                </motion.a>
+                            )}
                         </motion.div>
                     ))}
                 </div>

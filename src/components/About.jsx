@@ -85,7 +85,15 @@ const About = () => {
                             },
                             {
                                 title: "Problem Solving",
-                                content: "Regularly tackling competitive programming challenges. I've solved over 200+ problems across platforms like LeetCode and HackerRank, achieving a 5-star rating in C++.",
+                                content: (
+                                    <>
+                                        Regularly tackling competitive programming challenges. I&apos;ve solved over 200+ problems across platforms like 
+                                        <a href={import.meta.env.VITE_APP_LEETCODE_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="text-brand-secondary hover:underline mx-1">LeetCode</a> 
+                                        and 
+                                        <a href={import.meta.env.VITE_APP_HACKER_RANK_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="text-brand-secondary hover:underline mx-1">HackerRank</a>, 
+                                        achieving a 5-star rating in C++.
+                                    </>
+                                ),
                                 color: "secondary",
                                 delay: 0.4
                             },
