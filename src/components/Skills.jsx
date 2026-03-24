@@ -97,7 +97,7 @@ const Skills = () => {
                     />
                 </motion.div>
 
-                <div className="flex flex-col gap-12 sm:gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                     {skillCategories.map((category, catIdx) => (
                         <motion.div
                             key={catIdx}
@@ -105,17 +105,17 @@ const Skills = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: catIdx * 0.1 }}
-                            className="w-full"
+                            className="bg-[#0f0f15]/40 p-6 sm:p-8 rounded-3xl border border-white/5 shadow-2xl w-full"
                         >
                             <div className="flex items-center gap-3 mb-8">
                                 <div className={`${category.colorText} text-2xl`}>
                                     {category.icon}
                                 </div>
-                                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">{category.title}</h3>
+                                <h3 className="text-xl font-bold text-white tracking-wide">{category.title}</h3>
                                 <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent ml-4"></div>
                             </div>
 
-                            <div className="grid grid-cols-2 min-[500px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                            <div className="grid grid-cols-2 gap-4">
                                 {category.skills.map((skill, sIdx) => (
                                     <motion.div
                                         key={sIdx}
