@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { 
-  FaPython, FaReact, FaNodeJs, FaDatabase, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, 
-  FaCode, FaLaptopCode, FaServer, FaTools, FaBrain, FaWindows, FaLinux, FaGithub, FaFileExcel, 
+  FaPython, FaDatabase, FaGitAlt, 
+  FaCode, FaServer, FaTools, FaBrain, FaWindows, FaLinux, FaGithub, FaFileExcel, 
   FaChartBar, FaChartLine, FaMagic
 } from 'react-icons/fa';
 import { 
@@ -23,20 +23,7 @@ const skillCategories = [
             { name: "Java", icon: <DiJava className="text-6xl -my-3" />, colorDef: "text-red-500", desc: "Enterprise apps" }
         ]
     },
-    {
-        title: "Web Technologies",
-        icon: <FaLaptopCode />,
-        colorText: "text-indigo-400",
-        shadowHover: "hover:shadow-[0_0_20px_rgba(129,140,248,0.2)]",
-        borderHover: "hover:border-indigo-500/30",
-        skills: [
-            { name: "HTML", icon: <FaHtml5 />, colorDef: "text-orange-500", desc: "Page structure" },
-            { name: "CSS", icon: <FaCss3Alt />, colorDef: "text-blue-400", desc: "Styling & Layout" },
-            { name: "JavaScript", icon: <FaJs />, colorDef: "text-yellow-400", desc: "Web interactivity" },
-            { name: "React", icon: <FaReact />, colorDef: "text-cyan-400", desc: "UI Component library" },
-            { name: "Node.js", icon: <FaNodeJs />, colorDef: "text-green-500", desc: "JavaScript runtime" }
-        ]
-    },
+
     {
         title: "Database & Operating Systems",
         icon: <FaServer />,

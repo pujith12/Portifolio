@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaRobot, FaHeartbeat, FaChartLine, FaMusic, FaMicrochip, FaGithub } from 'react-icons/fa';
-import synthesiaImage from '../assets/synthesia.png';
+import { FaRobot, FaHeartbeat, FaChartLine, FaMicrochip, FaGithub } from 'react-icons/fa';
 
 const Projects = () => {
     const projects = [
@@ -34,16 +33,7 @@ const Projects = () => {
             github: import.meta.env.VITE_APP_ELECTION_DATA_VISUALIZATION_GITHUB_URL,
             description: "Constructed extensive data analysis pipelines designed to dissect large-scale electoral datasets, producing insightful graphical representations of voter demographics and historical trends."
         },
-        {
-            title: "Synthesia Music Platform",
-            category: "Full Stack Development",
-            icon: <FaMusic />,
-            color: "indigo",
-            tech: ["React.js", "Node.js", "Express", "MongoDB"],
-            image: synthesiaImage,
-            github: import.meta.env.VITE_APP_SYNTHESIA_MUSIC_PLATFORM_GITHUB_URL,
-            description: "Built a fully functional end-to-end music streaming application showcasing robust REST API integration, dynamic state management, and seamless audio playback architecture."
-        },
+
         {
             title: "CPU Scheduler Simulator",
             category: "Core CS + Visualization",
