@@ -1,78 +1,75 @@
 import { motion } from 'framer-motion';
-import { FaPython, FaReact, FaNodeJs, FaDatabase, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaCode, FaLaptopCode, FaLayerGroup, FaTools, FaChartPie, FaFileExcel } from 'react-icons/fa';
-import { SiMongodb, SiJupyter, SiCplusplus, SiC, SiTailwindcss, SiExpress, SiPandas, SiScikitlearn, SiMysql } from 'react-icons/si';
+import { 
+  FaPython, FaReact, FaNodeJs, FaDatabase, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, 
+  FaCode, FaServer, FaTools, FaBrain, FaWindows, FaLinux, FaGithub, FaFileExcel, 
+  FaChartBar, FaChartLine, FaMagic
+} from 'react-icons/fa';
+import { 
+  SiMongodb, SiJupyter, SiCplusplus, SiC, SiMysql 
+} from 'react-icons/si';
 import { DiJava } from 'react-icons/di';
 
 const skillCategories = [
     {
-        title: "Programming Languages",
+        title: "Programming Languages & Web",
         icon: <FaCode />,
         colorText: "text-blue-400",
-        colorHover: "group-hover:text-blue-400",
         shadowHover: "hover:shadow-[0_0_20px_rgba(96,165,250,0.2)]",
         borderHover: "hover:border-blue-500/30",
         skills: [
-            { name: "Python", icon: <FaPython />, desc: "General purpose & AI" },
-            { name: "JavaScript", icon: <FaJs />, desc: "Web interactivity" },
-            { name: "C++", icon: <SiCplusplus />, desc: "Systems & DSA" },
-            { name: "C", icon: <SiC />, desc: "Foundation & OS" },
-            { name: "Java", icon: <DiJava className="text-6xl -my-3" />, desc: "Enterprise apps" }
+            { name: "Python", icon: <FaPython />, colorHover: "group-hover:text-yellow-400", desc: "General purpose & AI" },
+            { name: "C", icon: <SiC />, colorHover: "group-hover:text-blue-500", desc: "Foundation & OS" },
+            { name: "C++", icon: <SiCplusplus />, colorHover: "group-hover:text-blue-600", desc: "Systems & DSA" },
+            { name: "Java", icon: <DiJava className="text-6xl -my-3" />, colorHover: "group-hover:text-red-500", desc: "Enterprise apps" },
+            { name: "HTML", icon: <FaHtml5 />, colorHover: "group-hover:text-orange-500", desc: "Page structure" },
+            { name: "CSS", icon: <FaCss3Alt />, colorHover: "group-hover:text-blue-400", desc: "Styling & Layout" },
+            { name: "JavaScript", icon: <FaJs />, colorHover: "group-hover:text-yellow-400", desc: "Web interactivity" },
+            { name: "React", icon: <FaReact />, colorHover: "group-hover:text-cyan-400", desc: "UI Component library" },
+            { name: "Node.js", icon: <FaNodeJs />, colorHover: "group-hover:text-green-500", desc: "JavaScript runtime" }
         ]
     },
     {
-        title: "Web Development",
-        icon: <FaLaptopCode />,
-        colorText: "text-indigo-400",
-        colorHover: "group-hover:text-indigo-400",
-        shadowHover: "hover:shadow-[0_0_20px_rgba(129,140,248,0.2)]",
-        borderHover: "hover:border-indigo-500/30",
-        skills: [
-            { name: "HTML5", icon: <FaHtml5 />, desc: "Page structure" },
-            { name: "CSS3", icon: <FaCss3Alt />, desc: "Styling & Layout" },
-            { name: "Node.js", icon: <FaNodeJs />, desc: "JavaScript runtime" },
-            { name: "Express.js", icon: <SiExpress />, desc: "Backend framework" }
-        ]
-    },
-    {
-        title: "Frameworks & Libraries",
-        icon: <FaLayerGroup />,
-        colorText: "text-purple-400",
-        colorHover: "group-hover:text-purple-400",
-        shadowHover: "hover:shadow-[0_0_20px_rgba(192,132,252,0.2)]",
-        borderHover: "hover:border-purple-500/30",
-        skills: [
-            { name: "React", icon: <FaReact />, desc: "UI Component library" },
-            { name: "Tailwind CSS", icon: <SiTailwindcss />, desc: "Utility-first styling" },
-            { name: "Pandas", icon: <SiPandas />, desc: "Data manipulation" },
-            { name: "Scikit-Learn", icon: <SiScikitlearn />, desc: "Machine learning" },
-            { name: "Framer Motion", icon: <motion.div className="w-8 h-8 bg-purple-400 rounded-md" />, desc: "Animation library" }
-        ]
-    },
-    {
-        title: "Databases",
-        icon: <FaDatabase />,
+        title: "Database & Operating Systems",
+        icon: <FaServer />,
         colorText: "text-emerald-400",
-        colorHover: "group-hover:text-emerald-400",
         shadowHover: "hover:shadow-[0_0_20px_rgba(52,211,153,0.2)]",
         borderHover: "hover:border-emerald-500/30",
         skills: [
-            { name: "MongoDB", icon: <SiMongodb />, desc: "NoSQL DB" },
-            { name: "SQL", icon: <FaDatabase />, desc: "Relational queries" },
-            { name: "MySQL", icon: <SiMysql />, desc: "RDBMS" }
+            { name: "RDBMS", icon: <FaDatabase />, colorHover: "group-hover:text-slate-300", desc: "Relational systems" },
+            { name: "SQL", icon: <FaDatabase />, colorHover: "group-hover:text-blue-400", desc: "Database querying" },
+            { name: "MongoDB", icon: <SiMongodb />, colorHover: "group-hover:text-green-500", desc: "NoSQL DB" },
+            { name: "Linux", icon: <FaLinux />, colorHover: "group-hover:text-yellow-500", desc: "Open-source OS" },
+            { name: "Windows", icon: <FaWindows />, colorHover: "group-hover:text-blue-400", desc: "Microsoft OS" }
         ]
     },
     {
-        title: "Tools & Technologies",
+        title: "Tools/Platforms",
         icon: <FaTools />,
         colorText: "text-orange-400",
-        colorHover: "group-hover:text-orange-400",
         shadowHover: "hover:shadow-[0_0_20px_rgba(251,146,60,0.2)]",
         borderHover: "hover:border-orange-500/30",
         skills: [
-            { name: "Git", icon: <FaGitAlt />, desc: "Version control" },
-            { name: "Jupyter", icon: <SiJupyter />, desc: "Notebook environment" },
-            { name: "Power BI", icon: <FaChartPie />, desc: "Data visualization" },
-            { name: "Excel", icon: <FaFileExcel />, desc: "Data processing" }
+            { name: "Git", icon: <FaGitAlt />, colorHover: "group-hover:text-orange-600", desc: "Version control" },
+            { name: "GitHub", icon: <FaGithub />, colorHover: "group-hover:text-white", desc: "Code hosting" },
+            { name: "Power BI", icon: <FaChartBar />, colorHover: "group-hover:text-yellow-500", desc: "Data visualization" },
+            { name: "Excel", icon: <FaFileExcel />, colorHover: "group-hover:text-green-600", desc: "Data processing" },
+            { name: "VS Code", icon: <FaCode />, colorHover: "group-hover:text-blue-500", desc: "Code editor" },
+            { name: "Jupyter", icon: <SiJupyter />, colorHover: "group-hover:text-orange-500", desc: "Notebook environment" },
+            { name: "IDLE", icon: <FaPython />, colorHover: "group-hover:text-yellow-400", desc: "Python IDE" },
+            { name: "MySQL", icon: <SiMysql />, colorHover: "group-hover:text-blue-400", desc: "RDBMS" }
+        ]
+    },
+    {
+        title: "Data Analytics & AI",
+        icon: <FaBrain />,
+        colorText: "text-purple-400",
+        shadowHover: "hover:shadow-[0_0_20px_rgba(192,132,252,0.2)]",
+        borderHover: "hover:border-purple-500/30",
+        skills: [
+            { name: "Predictive Analytics", icon: <FaChartLine />, colorHover: "group-hover:text-blue-400", desc: "Statistical forecasting" },
+            { name: "Machine Learning", icon: <FaBrain />, colorHover: "group-hover:text-purple-400", desc: "AI algorithms" },
+            { name: "Prompt Engineering", icon: <FaMagic />, colorHover: "group-hover:text-yellow-300", desc: "AI interaction setup" },
+            { name: "LLMs", icon: <FaBrain />, colorHover: "group-hover:text-indigo-400", desc: "Large Language Models" }
         ]
     }
 ];
@@ -125,7 +122,7 @@ const Skills = () => {
                                         whileHover={{ y: -5, scale: 1.02 }}
                                         className={`group relative bg-[#0f0f15]/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 shadow-lg ${category.shadowHover} ${category.borderHover}`}
                                     >
-                                        <div className={`text-5xl text-slate-400/80 ${category.colorHover} transition-colors duration-300 flex items-center justify-center min-h-[60px]`}>
+                                        <div className={`text-5xl text-slate-400/80 ${skill.colorHover} transition-colors duration-300 flex items-center justify-center min-h-[60px]`}>
                                             {skill.icon}
                                         </div>
                                         <span className="text-slate-300 font-medium text-center text-sm sm:text-base group-hover:text-white transition-colors duration-300">
